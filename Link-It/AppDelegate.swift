@@ -16,7 +16,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
         item = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
-        item?.button?.title = "Link It"
+        item?.button?.image = NSImage(named: "link")
         
         let menu = NSMenu()
         menu.addItem(NSMenuItem(title: "Link It!", action: #selector(AppDelegate.linkIt), keyEquivalent: ""))
