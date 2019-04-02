@@ -31,6 +31,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     @objc func linkIt() {
         print("Pressed")
+        printPasteBoard()
+    }
+    
+    func printPasteBoard() {
+        if let items = NSPasteboard.general.pasteboardItems {
+            for item in items {
+                for type in item.types {
+                    print("Type: \(type)")
+                    print("String: \(String(describing: item.string(forType: type)))")
+                }
+            }
+        }
+        
     }
     
     @objc func quit() {
