@@ -31,7 +31,20 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     @objc func linkIt() {
         print("Pressed")
-        printPasteBoard()
+        
+        if let items = NSPasteboard.general.pasteboardItems {
+            for item in items {
+                for type in item.types {
+                    if type.rawValue == "public.utf8-plain-text" {
+                        if let url = item.string(forType: type) {
+                            print(url)
+                        }
+                    }
+                }
+            }
+        }
+        
+        //printPasteBoard()
     }
     
     func printPasteBoard() {
