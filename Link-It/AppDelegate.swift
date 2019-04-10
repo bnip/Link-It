@@ -37,10 +37,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 for type in item.types {
                     if type.rawValue == "public.utf8-plain-text" {
                         if let url = item.string(forType: type) {
-                            printPasteBoard()
                             NSPasteboard.general.clearContents()
-                            NSPasteboard.general.setString("<a href=\"\(url)\">Clickable</a>" , forType: NSPasteboard.PasteboardType(rawValue: "public.html"))
-                            printPasteBoard()
+                            
+                            var actualURL = ""
+                            
+                            if(url.hasPrefix("http://") || url.hasPrefix("https://")) {
+                                actualURL = url
+                            } else {
+                                actualURL = "http://\(url)"
+                            }
+                            
+                            NSPasteboard.general.setString("<a href=\"\(actualURL)\">\(url)</a>" , forType: NSPasteboard.PasteboardType(rawValue: "public.html"))
+                            
+                            NSPasteboard.general.setString(url, forType: NSPasteboard.PasteboardType(rawValue: "public.utf8-plain-text"))
                         }
                     }
                 }
